@@ -36,8 +36,13 @@ public class ApiClient {
         j.put("status",b.status); j.put("date",b.date); j.put("time",b.time); j.put("location",b.location); j.put("cancellation_reason",b.reason); j.put("review_consent",reviewConsent);
         JSONObject o=new JSONObject(req(c,"POST","bookings",j.toString())); return Booking.from(o.getJSONObject("booking"));
     }
+    public static ReviewResponse sendReview(Context c,int id)throws Exception{
+        JSONObject o=new JSONObject(req(c,"POST","bookings/"+id+"/review","{}"));
+        ReviewResponse r=new ReviewResponse(); r.result=o.optString("result"); r.message=o.optString("message"); r.booking=Booking.from(o.getJSONObject("booking")); return r;
+    }
+    public static class ReviewResponse{ public String result="",message=""; public Booking booking; }
     public static class Booking{
-        public int id; public String name="",phone="",email="",service="",message="",status="new",statusLabel="",date="",time="",location="",reason="",created="",source="";
-        static Booking from(JSONObject j){ Booking b=new Booking(); b.id=j.optInt("id"); b.name=j.optString("name"); b.phone=j.optString("phone"); b.email=j.optString("email"); b.service=j.optString("service"); b.message=j.optString("message"); b.status=j.optString("status","new"); b.statusLabel=j.optString("status_label",b.status); b.date=j.optString("date"); b.time=j.optString("time"); b.location=j.optString("location"); b.reason=j.optString("cancellation_reason"); b.created=j.optString("created_at"); b.source=j.optString("source"); return b; }
+        public int id,reviewCount; public String name="",phone="",email="",service="",message="",status="new",statusLabel="",date="",time="",location="",reason="",created="",source="",reviewRequestedAt="",reviewMode=""; public boolean reviewConsent,canSendReview;
+        static Booking from(JSONObject j){ Booking b=new Booking(); b.id=j.optInt("id"); b.name=j.optString("name"); b.phone=j.optString("phone"); b.email=j.optString("email"); b.service=j.optString("service"); b.message=j.optString("message"); b.status=j.optString("status","new"); b.statusLabel=j.optString("status_label",b.status); b.date=j.optString("date"); b.time=j.optString("time"); b.location=j.optString("location"); b.reason=j.optString("cancellation_reason"); b.created=j.optString("created_at"); b.source=j.optString("source"); b.reviewConsent=j.optBoolean("review_consent",false); b.reviewRequestedAt=j.optString("review_requested_at"); b.reviewCount=j.optInt("review_request_count",0); b.reviewMode=j.optString("review_request_mode"); b.canSendReview=j.optBoolean("can_send_review",false); return b; }
         public String schedule(){return date.isEmpty()?"Lead nou":date+(time.isEmpty()?"":" · "+time);} }
 }
