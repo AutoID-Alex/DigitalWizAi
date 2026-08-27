@@ -3,7 +3,8 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <application android:allowBackup="false" android:icon="@drawable/ic_bowen" android:label="Programări Bowen" android:roundIcon="@drawable/ic_bowen" android:supportsRtl="true" android:theme="@style/AppTheme" android:usesCleartextTraffic="false">
+    <application android:allowBackup="false" android:icon="@drawable/app_icon_real" android:label="Programări Bowen" android:roundIcon="@drawable/app_icon_real" android:supportsRtl="true" android:theme="@style/AppTheme" android:usesCleartextTraffic="false">
+        <activity android:name=".NewBookingActivity" android:exported="false" />
         <activity android:name=".BookingDetailActivity" android:exported="false" />
         <activity android:name=".MainActivity" android:exported="false" />
         <activity android:name=".SplashActivity" android:exported="true">
