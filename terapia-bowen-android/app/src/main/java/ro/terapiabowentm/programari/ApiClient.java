@@ -30,8 +30,14 @@ public class ApiClient {
         JSONObject j=new JSONObject(); j.put("status",b.status); j.put("date",b.date); j.put("time",b.time); j.put("location",b.location); j.put("cancellation_reason",b.reason);
         JSONObject o=new JSONObject(req(c,"POST","bookings/"+b.id,j.toString())); return Booking.from(o.getJSONObject("booking"));
     }
+    public static Booking create(Context c, Booking b, boolean reviewConsent)throws Exception{
+        JSONObject j=new JSONObject();
+        j.put("name",b.name); j.put("phone",b.phone); j.put("email",b.email); j.put("service",b.service); j.put("message",b.message);
+        j.put("status",b.status); j.put("date",b.date); j.put("time",b.time); j.put("location",b.location); j.put("cancellation_reason",b.reason); j.put("review_consent",reviewConsent);
+        JSONObject o=new JSONObject(req(c,"POST","bookings",j.toString())); return Booking.from(o.getJSONObject("booking"));
+    }
     public static class Booking{
-        public int id; public String name="",phone="",email="",service="",message="",status="new",statusLabel="",date="",time="",location="",reason="",created="";
-        static Booking from(JSONObject j){ Booking b=new Booking(); b.id=j.optInt("id"); b.name=j.optString("name"); b.phone=j.optString("phone"); b.email=j.optString("email"); b.service=j.optString("service"); b.message=j.optString("message"); b.status=j.optString("status","new"); b.statusLabel=j.optString("status_label",b.status); b.date=j.optString("date"); b.time=j.optString("time"); b.location=j.optString("location"); b.reason=j.optString("cancellation_reason"); b.created=j.optString("created_at"); return b; }
+        public int id; public String name="",phone="",email="",service="",message="",status="new",statusLabel="",date="",time="",location="",reason="",created="",source="";
+        static Booking from(JSONObject j){ Booking b=new Booking(); b.id=j.optInt("id"); b.name=j.optString("name"); b.phone=j.optString("phone"); b.email=j.optString("email"); b.service=j.optString("service"); b.message=j.optString("message"); b.status=j.optString("status","new"); b.statusLabel=j.optString("status_label",b.status); b.date=j.optString("date"); b.time=j.optString("time"); b.location=j.optString("location"); b.reason=j.optString("cancellation_reason"); b.created=j.optString("created_at"); b.source=j.optString("source"); return b; }
         public String schedule(){return date.isEmpty()?"Lead nou":date+(time.isEmpty()?"":" · "+time);} }
 }
