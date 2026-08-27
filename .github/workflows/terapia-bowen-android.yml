@@ -24,8 +24,8 @@ jobs:
         working-directory: terapia-bowen-android
         run: gradle --no-daemon assembleDebug
       - name: Rename APK
-        run: cp terapia-bowen-android/app/build/outputs/apk/debug/app-debug.apk Terapia-Bowen-Programari-v0.3-test.apk
+        run: cp terapia-bowen-android/app/build/outputs/apk/debug/app-debug.apk Terapia-Bowen-Programari-v0.4-test.apk
       - uses: actions/upload-artifact@v4
         with:
-          name: terapia-bowen-programari-v030-apk
-          path: Terapia-Bowen-Programari-v0.3-test.apk
+          name: terapia-bowen-programari-v040-apk
+          path: Terapia-Bowen-Programari-v0.4-test.apk
