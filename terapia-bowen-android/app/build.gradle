@@ -10,3 +10,4 @@ android {
         versionName '0.1.0-test'
     }
 }
+// Trigger APK build for the Terapia Bowen test app.
