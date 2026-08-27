@@ -19,16 +19,18 @@ public class SplashActivity extends Activity {
         root.setGravity(Gravity.CENTER);
         root.setPadding(dp(36),dp(36),dp(36),dp(36));
         root.setBackgroundColor(Color.rgb(23,63,44));
+        root.setAlpha(0f);
 
         ImageView icon=new ImageView(this);
-        icon.setImageResource(R.drawable.splash_logo_real);
+        icon.setImageResource(R.drawable.ic_bowen);
         icon.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        icon.setPadding(dp(18),dp(18),dp(18),dp(18));
+        icon.setPadding(dp(10),dp(10),dp(10),dp(10));
         GradientDrawable bg=new GradientDrawable();
         bg.setColor(Color.rgb(247,245,240));
-        bg.setCornerRadius(dp(36));
+        bg.setCornerRadius(dp(38));
+        bg.setStroke(dp(2),Color.rgb(238,243,240));
         icon.setBackground(bg);
-        root.addView(icon,new LinearLayout.LayoutParams(dp(138),dp(138)));
+        root.addView(icon,new LinearLayout.LayoutParams(dp(152),dp(152)));
 
         TextView brand=new TextView(this);
         brand.setText("Terapia Bowen Timișoara");
@@ -36,7 +38,7 @@ public class SplashActivity extends Activity {
         brand.setTextSize(25);
         brand.setTypeface(null,Typeface.BOLD);
         brand.setGravity(Gravity.CENTER);
-        brand.setPadding(0,dp(22),0,dp(10));
+        brand.setPadding(0,dp(24),0,dp(10));
         root.addView(brand);
 
         TextView greet=new TextView(this);
@@ -44,8 +46,8 @@ public class SplashActivity extends Activity {
         greet.setTextColor(Color.rgb(235,244,239));
         greet.setTextSize(17);
         greet.setGravity(Gravity.CENTER);
-        greet.setLineSpacing(0,1.15f);
-        greet.setPadding(dp(10),0,dp(10),dp(24));
+        greet.setLineSpacing(0,1.18f);
+        greet.setPadding(dp(10),0,dp(10),dp(26));
         root.addView(greet);
 
         ProgressBar p=new ProgressBar(this);
@@ -60,10 +62,15 @@ public class SplashActivity extends Activity {
         root.addView(loading);
 
         setContentView(root);
-        new Handler(Looper.getMainLooper()).postDelayed(()->{
+        root.animate().alpha(1f).setDuration(320).start();
+
+        Handler handler=new Handler(Looper.getMainLooper());
+        handler.postDelayed(()->root.animate().alpha(0f).setDuration(260).start(),2500);
+        handler.postDelayed(()->{
             startActivity(new Intent(this,MainActivity.class));
             finish();
-        },1350);
+            overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+        },2800);
     }
 
     private int dp(int v){return (int)(v*getResources().getDisplayMetrics().density+.5f);}
