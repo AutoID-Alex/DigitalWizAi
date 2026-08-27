@@ -1,6 +1,7 @@
 package ro.terapiabowentm.programari;
 
 import android.app.*;
+import android.content.Intent;
 import android.os.*;
 import android.graphics.Color;
 import android.graphics.Typeface;
