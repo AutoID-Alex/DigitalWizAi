@@ -28,7 +28,7 @@ public class ApiClient {
     public static Booking get(Context c,int id)throws Exception{return Booking.from(new JSONObject(req(c,"GET","bookings/"+id,null)));}
     public static Booking update(Context c,Booking b)throws Exception{
         JSONObject j=new JSONObject(); j.put("status",b.status); j.put("date",b.date); j.put("time",b.time); j.put("location",b.location); j.put("cancellation_reason",b.reason);
-        JSONObject o=new JSONObject(req(c,"PATCH","bookings/"+b.id,j.toString())); return Booking.from(o.getJSONObject("booking"));
+        JSONObject o=new JSONObject(req(c,"POST","bookings/"+b.id,j.toString())); return Booking.from(o.getJSONObject("booking"));
     }
     public static class Booking{
         public int id; public String name="",phone="",email="",service="",message="",status="new",statusLabel="",date="",time="",location="",reason="",created="";
