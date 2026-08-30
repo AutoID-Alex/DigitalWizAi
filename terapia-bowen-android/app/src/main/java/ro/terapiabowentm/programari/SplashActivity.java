@@ -22,9 +22,9 @@ public class SplashActivity extends Activity {
         root.setAlpha(0f);
 
         ImageView icon=new ImageView(this);
-        icon.setImageResource(R.drawable.ic_bowen);
-        icon.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        icon.setPadding(dp(10),dp(10),dp(10),dp(10));
+        icon.setImageResource(R.drawable.app_icon_real);
+        icon.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        icon.setPadding(dp(18),dp(18),dp(18),dp(18));
         GradientDrawable bg=new GradientDrawable();
         bg.setColor(Color.rgb(247,245,240));
         bg.setCornerRadius(dp(38));
